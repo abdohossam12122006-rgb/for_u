@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
-   حِتّة ليك — app.js
+   4 ur eyes — app.js
    كل حاجة بتشتغل في المتصفح. مفيش سيرفر، مفيش حسابات.
-   الحِتّة بتتشفّر بـ AES-GCM والمفتاح بيتولّد من باسوردك (PBKDF2).
+   الدفتر بيتشفّر بـ AES-GCM والمفتاح بيتولّد من باسوردك (PBKDF2).
    ═══════════════════════════════════════════════════════════ */
 (() => {
   "use strict";
@@ -28,6 +28,7 @@
     del(k) { try { localStorage.removeItem(k); } catch {} },
   };
 
+  // ملاحظة: مفاتيح التخزين سايبينها زي ما هي عشان بيانات أي حد كتب قبل كده متضيعش
   const KEY = {
     vault: "hetet.vault.v1",
     names: "hetet.names.v1",
@@ -347,7 +348,7 @@
         "أول حاجة: انت صحيت. مش عشان انت قوي، ولا عشان الدنيا اتظبطت — بس انت صحيت. وده لوحده حاجة، خصوصًا لو اليوم اللي قبله كان تقيل.",
         "مش مطلوب منك النهاردة تبقى نسخة أحسن من نفسك. مطلوب منك بس تسمح لنفسك تبدأ من غير ما تحاسب نفسك على كل دقيقة.",
         "ابدأ بأصغر حاجة: اشرب ميّة. افتح الشباك. اقعد على السرير خمس دقايق وخلاص. مش لازم كل حاجة تحصل دلوقتي.",
-        "واللي حاسس بيه مش «كسل»، ومش «تقصير». ده جسم بيدافع عن نفسه لما يبقى مرهق زيادة. علاجه مش ضغط أكتر — علاجه راحة وحِتّة أمان. والحِتّة دي حِتّة أمان.",
+        "واللي حاسس بيه مش «كسل»، ومش «تقصير». ده جسم بيدافع عن نفسه لما يبقى مرهق زيادة. علاجه مش ضغط أكتر — علاجه راحة ومكان آمن. والمكان ده موجود هنا.",
       ],
       sig: "اليوم مش مسابقة. اعمله على قد طاقتك.",
     },
@@ -537,7 +538,7 @@
   });
 
   /* ═══════════════════════════════════════════
-     الحِتّة — التشفير
+     الدفتر — التشفير
      ═══════════════════════════════════════════ */
   const vault = $("#vaultApp");
   let sessionKey = null;
@@ -641,7 +642,7 @@
     if (p1.length < 4) { msg.textContent = "الباسورد لازم ٤ حروف على الأقل."; return; }
     if (p1 !== p2) { msg.textContent = "الباسورد مش متطابق. جرّب تاني."; return; }
 
-    msg.textContent = "بجهّز الحِتّة…";
+    msg.textContent = "بجهّز الدفتر…";
     try {
       const salt = crypto.getRandomValues(new Uint8Array(16));
       const key = await deriveKey(p1, salt);
@@ -664,7 +665,7 @@
       renderStats();
       startAutoLock();
       confetti(20);
-      toast("الحِتّة اتقفلت بالباسورد.");
+      toast("الدفتر اتقفل بالباسورد.");
     } catch {
       msg.textContent = "حصلت مشكلة. جرّب تاني.";
     }
@@ -756,7 +757,7 @@
     $("#unlockMsg").textContent = "";
     $("#unlockPass").value = "";
     clearTimeout(lockTimer);
-    if (auto) toast("قفلت الحِتّة لوحدها بعد فترة. باسوردك هيفتحها.");
+    if (auto) toast("الدفتر قفل لوحده بعد فترة. باسوردك هيفتحه.");
     const card = $("#vault");
     if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
   }
@@ -771,9 +772,9 @@
       <p class="modal-kicker">حاجة لازم تعرفها</p>
       <h3>مفيش طريقة ترجّع الباسورد</h3>
       <p>مفيش نسخة من كلامك عندي ولا على أي سيرفر. المفتاح بيتولّد من باسوردك، فلو ضاع مفيش طريقة ترجّعه.</p>
-      <p>لو فاكر تقريبًا، جرّب. ولو مش فاكر خالص، تقدر تمسح الحِتّة وتبدأ واحدة جديدة.</p>
+      <p>لو فاكر تقريبًا، جرّب. ولو مش فاكر خالص، تقدر تمسح الدفتر وتبدأ من جديد.</p>
       <div class="modal-actions">
-        <button class="btn btn-ghost" id="forgotWipe" style="border-color:rgba(226,115,111,.4);color:#f0b4b0">امسح الحِتّة وابدأ من جديد</button>
+        <button class="btn btn-ghost" id="forgotWipe" style="border-color:rgba(226,115,111,.4);color:#f0b4b0">امسح الدفتر وابدأ من جديد</button>
         <button class="btn btn-primary" data-close>لسه هحاول أفتكر</button>
       </div>
       <p class="modal-note">نصيحة: خزّن الباسورد في تطبيق باسوردات أو مكان آمن.</p>
@@ -781,7 +782,7 @@
     $("#forgotWipe").addEventListener("click", () => {
       closeModal();
       confirmModal({
-        title: "متأكد إنك عايز تمسح الحِتّة؟",
+        title: "متأكد إنك عايز تمسح الدفتر؟",
         text: "كل اللي مكتوب جواها هيتمسح نهائيًا. مفيش رجوع.",
         confirmLabel: "امسح نهائيًا",
         danger: true,
@@ -856,7 +857,7 @@
     if (!list.length) {
       box.innerHTML = q
         ? `<div class="empty"><b>مفيش حاجة بالكلمة دي</b>جرّب كلمة تانية، أو امسح البحث.</div>`
-        : `<div class="empty"><b>الحِتّة فاضية، وده حلو</b>أول حاجة تكتبها مش لازم تبقى كلام كبير.<br>حرف واحد كفاية تبدأ.</div>`;
+        : `<div class="empty"><b>الدفتر فاضي، وده حلو</b>أول حاجة تكتبها مش لازم تبقى كلام كبير.<br>حرف واحد كفاية تبدأ.</div>`;
       return;
     }
     box.innerHTML = list
@@ -896,7 +897,7 @@
         const id = b.closest(".entry").dataset.id;
         confirmModal({
           title: "تمسح الكتابة دي؟",
-          text: "هتتمسح نهائيًا من الحِتّة. مفيش رجوع.",
+          text: "هتتمسح نهائيًا من الدفتر. مفيش رجوع.",
           confirmLabel: "امسح",
           danger: true,
           onConfirm: async () => {
@@ -971,7 +972,7 @@
   $("#exportBtn").addEventListener("click", () => {
     if (!entries.length) { toast("مفيش حاجة تتصدّر لسه."); return; }
     const sorted = entries.slice().sort((a, b) => a.ts - b.ts);
-    const lines = ["# حِتّة ليك — اللي كتبته", ""];
+    const lines = ["# 4 ur eyes — اللي كتبته", ""];
     sorted.forEach((e) => {
       lines.push(`**${new Date(e.ts).toLocaleString("ar-EG")}**`);
       if (e.mood) lines.push(`- المزاج: ${e.mood}`);
@@ -981,7 +982,7 @@
     const blob = new Blob(["\ufeff" + lines.join("\n")], { type: "text/markdown;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `hetet-${new Date().toISOString().slice(0, 10)}.md`;
+    a.download = `4ur-eyes-${new Date().toISOString().slice(0, 10)}.md`;
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 3000);
     toast("اتصدّرت. احتفظ بالملف في مكان آمن.");
@@ -1028,7 +1029,7 @@
     });
   });
 
-  /* مسح الحِتّة */
+  /* مسح الدفتر */
   $("#wipeBtn").addEventListener("click", () => {
     confirmModal({
       title: "تمسح كل اللي كتبته؟",
@@ -1041,7 +1042,7 @@
         entries = [];
         $("#searchEntries").value = "";
         setState("setup");
-        toast("اتمسح. تقدر تبدأ حِتّة جديدة وقت ما تحب.");
+        toast("اتمسح. تقدر تبدأ دفتر جديد وقت ما تحب.");
       },
     });
   });
@@ -1050,7 +1051,7 @@
   $("#resetAll").addEventListener("click", () => {
     confirmModal({
       title: "تمسح كل بيانات الموقع من الجهاز ده؟",
-      text: "الحِتّة، الأسماء، والقائمة اليومية — كله هيتمسح. مفيش رجوع.",
+      text: "الدفتر، الأسماء، والقائمة اليومية — كله هيتمسح. مفيش رجوع.",
       confirmLabel: "امسح كل حاجة",
       danger: true,
       onConfirm: () => {
@@ -1090,7 +1091,7 @@
     });
   });
 
-  /* قفل احتياطي: لو ساب الموبايل والتاب في الخلفية دقيقة ونص، الحِتّة تقفل لوحدها */
+  /* قفل احتياطي: لو ساب الموبايل والتاب في الخلفية دقيقة ونص، الدفتر يقفل لوحده */
   let hiddenTimer = null;
   document.addEventListener("visibilitychange", () => {
     if (vault.dataset.state !== "open") return;
@@ -1111,7 +1112,7 @@
     }
   });
 
-  /* ───────── تشغيل مبدئي للحِتّة ───────── */
+  /* ───────── تشغيل مبدئي للدفتر ───────── */
   function boot() {
     const rec = getVault();
     if (!rec) { setState("setup"); }
