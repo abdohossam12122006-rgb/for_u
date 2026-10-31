@@ -744,9 +744,27 @@
     sessionKey = null;
     entries = [];
     setState("locked");
+    // مهم: نشيل النص المفكوك من الصفحة نفسها، مش نخفيه بس
+    const list = $("#entries");
+    if (list) list.innerHTML = "";
+    const search = $("#searchEntries");
+    if (search) search.value = "";
+    const stats = $("#stats");
+    if (stats) stats.innerHTML = "";
+    const title = $("#entryTitle");
+    const body = $("#entryBody");
+    if (title) title.value = "";
+    if (body) { body.value = ""; body.style.height = ""; }
+    draftMood = "";
+    $$(".mood").forEach((m) => { m.classList.remove("on"); m.setAttribute("aria-pressed", "false"); });
+    const metaEl = $("#composerMeta");
+    if (metaEl) { delete metaEl.dataset.locked; metaEl.textContent = "مفيش حاجة مستعجلة."; }
     $("#unlockMsg").textContent = "";
+    $("#unlockPass").value = "";
     clearTimeout(lockTimer);
     if (auto) toast("قفلت الحِتّة لوحدها بعد فترة. باسوردك هيفتحها.");
+    const card = $("#vault");
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
   }
   $("#lockBtn").addEventListener("click", () => { lockVault(); toast("اتقفلت."); });
   ["click", "keydown", "pointermove"].forEach((ev) =>
@@ -1076,6 +1094,27 @@
       const keys = Object.keys(letters);
       openLetter(keys[Math.floor(Math.random() * keys.length)]);
     });
+  });
+
+  /* قفل احتياطي: لو ساب الموبايل والتاب في الخلفية دقيقة ونص، الحِتّة تقفل لوحدها */
+  let hiddenTimer = null;
+  document.addEventListener("visibilitychange", () => {
+    if (vault.dataset.state !== "open") return;
+    if (document.visibilityState === "hidden") {
+      persistDraft().catch(() => {});
+      clearTimeout(hiddenTimer);
+      hiddenTimer = setTimeout(() => {
+        if (document.visibilityState === "hidden" && vault.dataset.state === "open") lockVault(true);
+      }, 90000);
+    } else {
+      clearTimeout(hiddenTimer);
+    }
+  });
+  window.addEventListener("pagehide", () => {
+    if (vault.dataset.state === "open") {
+      const list = $("#entries");
+      if (list) list.innerHTML = "";
+    }
   });
 
   /* ───────── تشغيل مبدئي للحِتّة ───────── */
