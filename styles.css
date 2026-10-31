@@ -697,26 +697,6 @@ input[type="password"]{letter-spacing:.28em;font-size:15px}
 .song-player iframe{width:100%;height:100%;border:0;display:block}
 .song.mix{border-color:rgba(243,189,136,.2);background:linear-gradient(158deg,rgba(243,189,136,.1),rgba(255,255,255,.014))}
 
-/* ═══ مساعدة ═══ */
-.help{padding-bottom:clamp(60px,8vw,100px)}
-.help-card{padding:clamp(28px,5vw,54px);background:linear-gradient(158deg,rgba(243,189,136,.075),rgba(255,255,255,.014))}
-.help-card h2{font-size:clamp(25px,3.8vw,38px);margin-bottom:16px;letter-spacing:-.5px}
-.help-p{font-size:14.5px;color:var(--cream-2);font-weight:300;line-height:2.05;max-width:66ch}
-.help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
-.help-item{
-  padding:18px;border-radius:16px;border:1px solid var(--line);background:rgba(0,0,0,.22);
-}
-.help-item.danger{border-color:rgba(226,115,111,.28);background:rgba(226,115,111,.06)}
-.help-label{display:block;font-size:11.5px;color:var(--dim);margin-bottom:6px}
-.help-num{
-  display:inline-block;font-family:var(--serif);font-size:22px;letter-spacing:.02em;
-  color:var(--cream);direction:ltr;transition:color .3s;
-}
-.help-num:hover{color:var(--amber)}
-.help-item.danger .help-num:hover{color:var(--red)}
-.help-item.danger .help-num{color:#f0b4b0}
-.help-note{font-size:11px;color:var(--dim-2);margin-top:6px;line-height:1.8}
-.help-sign{font-family:var(--quote);font-size:16px;color:var(--amber);margin-top:26px;line-height:1.9}
 
 /* ═══ فوتر ═══ */
 .footer{
@@ -772,7 +752,6 @@ input[type="password"]{letter-spacing:.28em;font-size:15px}
 .calm-list{display:flex;flex-direction:column;gap:10px;margin:16px 0 6px}
 .calm-item{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--cream-2);font-weight:300;line-height:1.9;background:rgba(255,255,255,.03);border:1px solid var(--line-2);border-radius:12px;padding:11px 13px}
 .calm-item .num{color:var(--amber);font-family:var(--serif);flex:none}
-.calm-num{display:inline-block;direction:ltr;font-family:var(--serif);color:var(--amber);font-size:15px;margin-inline-start:4px}
 
 /* ═══ توست + كونفيتي ═══ */
 .toast{
@@ -802,7 +781,6 @@ input[type="password"]{letter-spacing:.28em;font-size:15px}
   .letters-grid{grid-template-columns:repeat(2,1fr)}
   .songs-grid{grid-template-columns:repeat(2,1fr)}
   .small-grid{grid-template-columns:repeat(2,1fr)}
-  .help-grid{grid-template-columns:1fr}
   .hero-grid{grid-template-columns:1fr;gap:44px}
   .hero-art{order:2;margin-top:8px}
   .lantern{width:190px;height:190px}
@@ -855,8 +833,6 @@ input[type="password"]{letter-spacing:.28em;font-size:15px}
   .composer-actions .btn{flex:1}
   .vault-tools{gap:12px}
   .panic{bottom:16px;inset-inline-start:16px;padding:10px 14px;font-size:12px}
-  .help-card{padding:24px 18px}
-  .help-num{font-size:20px}
   .footer{padding-bottom:74px}
   .modal-panel{padding:24px 20px;max-height:88svh}
   .modal-x{inset-inline-end:8px;top:8px}
@@ -1006,7 +982,6 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 .entry-title-input:focus{background:rgba(0,0,0,.24);border-color:rgba(243,189,136,.36)}
 
 /* أرقام الأرقام */
-.help-num,.calm-num{direction:ltr;unicode-bidi:isolate}
 
 /* أزرار التابات على الموبايل */
 @media (max-width:420px){
@@ -1067,3 +1042,9 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 
 /* الكارت اللي من غير رمز: مسافة فاضية تخلّيه متساوي مع الباقي */
 .letter--plain::before{content:"";display:block;width:38px;height:38px;flex:none}
+
+/* نوتة البانل السريع (بدل لينك المساعدة) */
+.quick-note{
+  font-size:12.5px;color:var(--dim-2);line-height:1.9;
+  margin-top:18px;padding-top:14px;border-top:1px solid var(--line-2);
+}

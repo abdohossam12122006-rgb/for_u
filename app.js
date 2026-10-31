@@ -1071,7 +1071,7 @@
         <div class="calm-item"><span class="num">١</span><span>اقعد، وحط إيدك على صدرك. خد نفس بطيء: شهيق ٤، وقفة ٤، زفير ٦. كرّر ٤ مرات.</span></div>
         <div class="calm-item"><span class="num">٢</span><span>بصّ حوالينك وسمّي ٣ حاجات بتشوفها، بصوت واطي أو في سرك.</span></div>
         <div class="calm-item"><span class="num">٣</span><span>اغسل وشك بميّة ساقعة، أو حط ميّة ساقعة على رسغك دقيقة.</span></div>
-        <div class="calm-item"><span class="num">٤</span><span>لو حسّيت إنك في خطر، اتصل دلوقتي: <a class="calm-num" href="tel:08008880700">0800 888 0700</a> — مجاني، أو <a class="calm-num" href="tel:123">123</a> للإسعاف.</span></div>
+        <div class="calm-item"><span class="num">٤</span><span>لو حسّيت إنك في خطر، متسيبش نفسك لوحدك: كلم حد قريب منك، أو روح أقرب مستشفى.</span></div>
       </div>
       <div class="modal-actions">
         <button class="btn btn-primary" id="panicBreathe">ابدأ تنفس دقيقة</button>
